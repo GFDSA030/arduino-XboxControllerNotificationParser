@@ -4,8 +4,6 @@
 #define XBOX_CONTROLLER_INDEX_BUTTONS_MAIN 13
 #define XBOX_CONTROLLER_INDEX_BUTTONS_CENTER 14
 #define XBOX_CONTROLLER_INDEX_BUTTONS_SHARE 15
-#define XBOX_CONTROLLER_INDEX_PROFILE 16
-#define XBOX_CONTROLLER_INDEX_PADDLES 18
 
 XboxControllerNotificationParser::XboxControllerNotificationParser() {
   btnA = btnB = btnX = btnY = false;
@@ -44,29 +42,6 @@ uint8_t XboxControllerNotificationParser::update(uint8_t* data, size_t length) {
   btnDirRight = 2 <= btnBits && btnBits <= 4;
   btnDirDown = 4 <= btnBits && btnBits <= 6;
   btnDirLeft = 6 <= btnBits && btnBits <= 8;
-
-  if (length > XBOX_CONTROLLER_INDEX_PROFILE)
-  {
-    profile = data[XBOX_CONTROLLER_INDEX_PROFILE];
-  }
-  else{
-    profile = 0;
-  }
-
-  if (length > XBOX_CONTROLLER_INDEX_PADDLES)
-  {
-    btnBits = data[XBOX_CONTROLLER_INDEX_PADDLES];
-    btnP1 = btnBits & 0b00000001;
-    btnP2 = btnBits & 0b00000010;
-    btnP3 = btnBits & 0b00000100;
-    btnP4 = btnBits & 0b00001000;
-  }
-  else{
-    btnP1 = false;
-    btnP2 = false;
-    btnP3 = false;
-    btnP4 = false;
-  }
 
   joyLHori = (uint16_t)data[0] | ((uint16_t)data[1] << 8);
   joyLVert = (uint16_t)data[2] | ((uint16_t)data[3] << 8);
@@ -168,11 +143,6 @@ String XboxControllerNotificationParser::toString() {
     "btnDirRight: " + String(btnDirRight) + " " +
     "btnDirDown: " + String(btnDirDown) + " " +
     "btnDirLeft: " + String(btnDirLeft) + "\n"
-    "btnPaddle1: " + String(btnP1) + " "
-    "btnPaddle2: " + String(btnP2) + " "
-    "btnPaddle3: " + String(btnP3) + " "
-    "btnPaddle4: " + String(btnP4) + "\n"
-    "profile: " + String(profile) + "\n"
     "joyLHori: " + String(joyLHori) + "\n" +
     "joyLVert: " + String(joyLVert) + "\n" +
     "joyRHori: " + String(joyRHori) + "\n" +

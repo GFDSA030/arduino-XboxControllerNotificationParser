@@ -16,8 +16,6 @@ class XboxControllerNotificationParser {
   // button on joy stick
   bool btnLS, btnRS;
   bool btnDirUp, btnDirLeft, btnDirRight, btnDirDown;
-  bool btnP1, btnP2, btnP3, btnP4;
-  uint8_t profile;
   uint16_t joyLHori = maxJoy / 2;
   uint16_t joyLVert = maxJoy / 2;
   uint16_t joyRHori = maxJoy / 2;
