@@ -15,7 +15,7 @@ XboxControllerNotificationParser::XboxControllerNotificationParser() {
 }
 
 uint8_t XboxControllerNotificationParser::update(uint8_t* data, size_t length) {
-  if (length != expectedDataLen) {
+  if (length < expectedDataLen) {
     return XBOX_CONTROLLER_ERROR_INVALID_LENGTH;
   }
   uint8_t btnBits;
